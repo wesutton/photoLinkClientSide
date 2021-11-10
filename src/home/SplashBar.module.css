@@ -1,0 +1,46 @@
+.splashbarDiv{
+    
+
+
+ 
+
+   
+}    
+.splashbarStyling{
+    background-color: rgb(238, 227, 197);
+    height: 50px;
+   
+}
+
+
+.splashbarUl {
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        justify-content: space-evenly;
+        text-align: center;
+        margin-right: 40px;
+        font-size: 20px;
+        text-decoration: none;
+        padding-top: 10px;
+        
+    
+        
+       
+        
+    }
+
+li{   
+            text-decoration: none;
+        }
+
+.link{
+    text-decoration: none;
+    color:rgb(52, 54, 54)
+}
+
+.link:hover{
+    background-color: rgb(255, 255, 255);
+    height: 40px;
+    color: rgb(52, 54, 54);
+}

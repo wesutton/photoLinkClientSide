@@ -6,17 +6,21 @@ import {
 } from 'reactstrap';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import './Navbar.scss'
+
+
 
 const Sitebar: React.FC<{clickLogout: (logout: React.FormEvent) => void }> = (props) => {
     return (
-        <div>
-        <Stack direction="row" spacing={2}>
-            <Navbar color = "faded" light expand = "md">
+            <Navbar color = "faded" light expand = "md" className = "navbar">
                 <NavbarBrand href = '/'>PhotoLink</NavbarBrand>
-                <Button onClick={props.clickLogout} variant="outlined">Logout</Button>
+                <ul className="navbar-items">
+                    <li><Button onClick={props.clickLogout} variant="outlined" className="button">Logout</Button></li>
+                </ul>
             </Navbar> 
-        </Stack>
-        </div>
+
+      
+
     )
 }
 
