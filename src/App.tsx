@@ -3,6 +3,7 @@ import Sitebar from './home/Navbar';
 import Auth from './auth/Auth'
 import HomePage from './home/App';
 import './App.css';
+import Footer from './home/Footer'
 
 const App: React.FC = () => {
 
@@ -34,7 +35,11 @@ const App: React.FC = () => {
     <div className="App">
       <Sitebar clickLogout={clearToken} />
       {protectedViews()}
+    <div> 
+      <Footer/>
     </div>
+   
+    </div>  
   );
 }
 

@@ -6,6 +6,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import './Auth.css'
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -20,7 +21,7 @@ const Auth: React.FC<{updateToken: (newtoken: any) => void}> = (props) => {
     setValue(newValue);
   };
 
-  const paperStyle = { width: "fit-content", margin: "20px auto" };
+  const paperStyle = { width: "fit-content", margin: "20px auto", };
 
   function TabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
@@ -50,6 +51,7 @@ const Auth: React.FC<{updateToken: (newtoken: any) => void}> = (props) => {
   }
 
   return (
+  <div className="auth-background">
     <Paper elevation={20} style={paperStyle}>
       <Tabs
         value={value}
@@ -68,7 +70,7 @@ const Auth: React.FC<{updateToken: (newtoken: any) => void}> = (props) => {
       <TabPanel value={value} index={1}>
         <Signup updateToken={props.updateToken} />
       </TabPanel>
-    </Paper>
+    </Paper></div>
   );
 };
 

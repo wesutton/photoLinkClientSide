@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import CommentsIndex from '../comments/CommentsIndex'
 import { CardActionArea } from '@mui/material';
 import { CommentOutlined, } from '@ant-design/icons';
 
@@ -18,11 +20,14 @@ export default class searchFilter extends Component {
             <div>
                  <div className = "image-card">
                     {this.props.filter.map((image) => (
-                         <div> <Card sx={{ maxWidth: 345 }} key={image.id} >
+                         <div>  <Link to = {`/mypage/${image.id}`} id = {image.id} token={this.props.token}> <Card sx={{ maxWidth: 345 }} key={image.id} >
                             <CardActionArea>
                                 <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
+                                    <Typography gutterBottom variant="h6" component="div">
                                         {image.name}
+                                    </Typography>
+                                    <Typography gutterBottom variant="h10" component="div">
+                                        <p>by: {image.user.username}</p>
                                     </Typography>
                                 </CardContent>
                                 <CardMedia
@@ -31,9 +36,8 @@ export default class searchFilter extends Component {
                                     image={image.avatar}
                                     alt="image"
                                 />
-                            </CardActionArea>
-                            <CommentOutlined />
-                        </Card>
+                            </CardActionArea> 
+                        </Card>  </Link>
                         <br/>
                         </div>
                     ))}</div>

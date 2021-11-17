@@ -11,7 +11,7 @@ type AcceptedProps = {
 
 const Login: React.FC<AcceptedProps> = (props) =>{
 
-    const paperStyle={padding :20,height:'73vh',width:300, margin:"0 auto"}
+    const paperStyle={padding :20,height:'fit-content',width:300, margin:"0 auto"}
     const avatarStyle={backgroundColor:'#1bbd7e'}
     const btnstyle={margin:'8px 0'}
 
@@ -36,7 +36,6 @@ const Login: React.FC<AcceptedProps> = (props) =>{
     return(
         <Grid>
             <Paper  style={paperStyle}>
-               
                 <Grid alignContent ='center'>
                      <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
                     <h2>Login</h2>
@@ -55,17 +54,11 @@ const Login: React.FC<AcceptedProps> = (props) =>{
                  />
                 <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>   
                 </form>
-                <Typography >
-                     <Link href="#" >
-                        Forgot password ?
-                </Link>
-                </Typography>
                 <Typography > Do you have an account ?
                      <Link href="#" onClick={()=>props.handleChange("event", 1)} >
                         Sign Up 
                     </Link>
                 </Typography>
-             
             </Paper>
         </Grid>
     )
