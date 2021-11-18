@@ -22,6 +22,7 @@ const Auth: React.FC<{updateToken: (newtoken: any) => void}> = (props) => {
   };
 
   const paperStyle = { width: "fit-content", margin: "20px auto", };
+  const tabstyle = {marginLeft:'80px',};
 
   function TabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
@@ -52,6 +53,7 @@ const Auth: React.FC<{updateToken: (newtoken: any) => void}> = (props) => {
 
   return (
   <div className="auth-background">
+    
     <Paper elevation={20} style={paperStyle}>
       <Tabs
         value={value}
@@ -59,6 +61,7 @@ const Auth: React.FC<{updateToken: (newtoken: any) => void}> = (props) => {
         textColor="primary"
         onChange={handleChange}
         aria-label="disabled tabs example"
+        style={tabstyle}
       >
         <Tab label="Sign In" {...a11yProps(0)} />
 

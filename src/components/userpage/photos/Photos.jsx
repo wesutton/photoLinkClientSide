@@ -1,28 +1,25 @@
 import React, { Component } from 'react'
 import UploadForm from './UploadForm'
-import EditImage from './EditImage';
+import MyPhotosRedirect from '../../UI/MyPhotosRedirect';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
 import { CardActionArea } from '@mui/material';
 import { EditOutlined, CommentOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { Image } from 'antd';
-import CommentsModal from './CommentsModal';
-import About from '../about/About';
-import './Photos.scss'
-import PhotoCard from './CommentsModal';
-import { runInThisContext } from 'vm';
-
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 class Photos extends Component {
     constructor(props) {
         super(props);
         this.state = {
             posts: null,
+            loading: true,
+            token: this.props.token
         };
         this.fetchMyPosts = this.fetchMyPosts.bind(this);
     }
@@ -40,7 +37,7 @@ class Photos extends Component {
             })
         }).then((res) => res.json())
             .then((posts) => {
-                this.setState({ posts: posts })
+                this.setState({ posts: posts, isLoaded: true })
                 console.log(posts)
 
             }).catch((error) => {
@@ -65,15 +62,39 @@ class Photos extends Component {
                 updatedPosts = this.state.posts.filter((image) => image._id !== id)
                 this.setState({ updatedPosts });
                 this.setState(this.fetchMyPosts());
+            }).catch((error) => {
+                console.log(error)
             })
     }
 
 
     render() {
-        const id = this.props.match.params.id
+        const username = this.state.posts?.filter((name, idx) => idx < 1).map(name => {
+            return <p>{name.user.username}</p>
+        });
+        console.log(username)
+
+        
+        const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+            if(this.state.token === null){
+                return <div className = "redirect-card"><MyPhotosRedirect/></div>
+            } else if (!this.state.isLoaded) {
+            return (
+                <div>
+                    <br/>
+                    <UploadForm fetchMyPosts={this.fetchMyPosts} token={this.props.token} />
+                    <br />
+                    <div>
+                    <Spin indicator={antIcon} style={{marginTop: '200px'}} />
+                    </div>
+                </div>
+            )
+        } else {
+            
         return (
             <div>
-                <hr />
+                <br/>
+                <h3>{username}</h3>
                 <UploadForm fetchMyPosts={this.fetchMyPosts} token={this.props.token} />
                 <br />
                 <div className="image-card">{this.state.posts?.map((image, _id) => {
@@ -91,12 +112,8 @@ class Photos extends Component {
                             />
 
                         </CardActionArea>
-                        {/* <Button type="button" icon={<CommentOutlined style = {{paddingRight: '20px'}}  />} class="btn btn-primary" style = {{width: '20px'}} data-bs-toggle="modal" data-bs-target="#commentsModal">
-                        <CommentsModal/>
-                        </Button> */}
-                        <Link to={`/allreviews/${image.id}`} token={this.props.token} >click</Link>
-                        {/* <EditImage token={this.props.token} id={image.id} key = {image._id} /> */}
-                        <Link to={`/mypage/edit/${image.id}`} token={this.props.token} key={_id} ><EditOutlined /></Link>
+                        <Link to={`/allreviews/${image.id}`} token={this.props.token} ><Button icon={<CommentOutlined/>}></Button></Link>
+                        <Link to={`/mypage/edit/${image.id}`} token={this.props.token} key={_id} ><Button icon={<EditOutlined />}></Button></Link>
                         <Button icon={<DeleteOutlined />} onClick={() => this.deleteImage(image.id)}></Button>
                         
                     </Card>
@@ -111,5 +128,6 @@ class Photos extends Component {
             </div>
         )
     }
+}
 }
 export default withRouter(Photos);

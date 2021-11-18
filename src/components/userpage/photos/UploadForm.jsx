@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, FormGroup } from 'reactstrap';
-import { Button } from 'reactstrap'
 import {RiImageAddFill} from 'react-icons/ri'
 import './UploadForm.scss'
 
@@ -32,7 +31,7 @@ const UploadForm = (props) => {
             });
             if (res.ok) {
                 setData({name: '', image: ''})
-                this.props.fetchMyPosts();
+                console.log('image uploaded')
             }
         } catch (error) {
             console.log(error)
@@ -57,11 +56,11 @@ const UploadForm = (props) => {
                             <Form>
                                 <FormGroup>
                                     <label htmlFor="name" />
-                                    <input className = "form-control" name="name" type="text" placeholder="title" value={data.name} onChange={handleChange('name')} />
+                                    <input  className = "form-control" name="name" type="text" placeholder="title" value={data.name} onChange={handleChange('name')} required/>
                                 </FormGroup>
                                 <FormGroup>
                                     <label htmlFor="image" />
-                                    <input className = "form-control" name="image" type="file" accept="image/*"  onChange={handleChange('image')} />
+                                    <input className = "form-control" name="image" type="file" accept="image/*"  onChange={handleChange('image')} required />
                                 </FormGroup>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

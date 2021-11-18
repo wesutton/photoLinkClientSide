@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
 import Card from '@mui/material/Card';
+import MyReviewsRedirect from '../../UI/MyReviewsRedirect';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Button } from 'antd';
 import { Image } from 'antd';
 import { Link } from 'react-router-dom';
-import { Comment, Tooltip, Avatar } from 'antd';
+import { Comment, Tooltip} from 'antd';
 import './UserReviewIndex.scss'
 
 export default class UserReviewsIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            myreviews: []
+            myreviews: [],
+            token: this.props.token
         };
         this.fetchMyReviews = this.fetchMyReviews.bind(this);
     }
@@ -58,6 +60,9 @@ export default class UserReviewsIndex extends Component {
 
 
     render() {
+        if(this.state.token === null){
+            return <div className = "redirect-card"><MyReviewsRedirect/></div>
+        } else {
         return (
             <div>
                 <div className="review-cards" >
@@ -103,4 +108,5 @@ export default class UserReviewsIndex extends Component {
 
         )
     }
+}
 }

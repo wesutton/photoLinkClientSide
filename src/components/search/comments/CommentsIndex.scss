@@ -7,6 +7,7 @@
   flex-direction: column;
   
   
+  
   .reviews-list {
     display: flex;
     flex-direction: column-reverse;
@@ -15,7 +16,8 @@
     border-radius: 2px;
     border-style: solid;
     border-width: .5px;
-    border-color: rgb(116, 116, 116);
+    border-color: rgb(116, 116, 116);  width: 100%;
+    
    
 
   }
@@ -23,4 +25,12 @@
   .review-username{
     padding-left: 20px;
   }
+
+  
+.redirect-card{
+  display: flex;
+  justify-content: center;
+  margin-top: 75px;
+}
+
 }

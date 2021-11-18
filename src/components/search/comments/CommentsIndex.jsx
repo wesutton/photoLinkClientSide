@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router';
+import ViewReviewsRedirect from '../../UI/ViewReviewsRedirect'
 import { Image } from 'antd';
 import { Button } from 'antd';
 import Card from '@mui/material/Card';
@@ -10,19 +11,14 @@ import { Comment, Tooltip, Avatar } from 'antd';
 import './CommentsIndex.scss';
 import { Input } from 'antd';
 
-
-import moment from 'moment';
-
-import InfiniteScroll from 'react-infinite-scroll-component';
-
-
 class CommentsIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
             posts: [],
             reviews: [],
-            newReview: ''
+            newReview: '',
+            token: this.props.token
         };
         console.log(this.state.reviews)
         this.fetchPost = this.fetchPost.bind(this);
@@ -53,7 +49,7 @@ class CommentsIndex extends Component {
 
     async fetchReviews() {
         const id = this.props.match.params.id
-        await fetch(`http://localhost:3000/reviews/${id}`, {  
+        await fetch(`http://localhost:3000/reviews/${id}`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -95,14 +91,6 @@ class CommentsIndex extends Component {
             })
     }
 
-
-
-
-
-
-
-
-
     reviewInput = (event) => {
         this.setState({ newReview: event.target.value })
         console.log(this.state.newReview)
@@ -113,63 +101,65 @@ class CommentsIndex extends Component {
     render() {
 
         const { TextArea } = Input;
-    
-        return (
-            <div class="container">
-                <br />
-                <br />
-                <div class="row">
-                    <div class="col">
-                        <Card sx={{ maxWidth: 400 }} key={this.state.posts.id} >
-                            <CardActionArea>
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
-                                        {this.state.posts.name}
-                                    </Typography>
-                                </CardContent> <Image
-                                    width={400}
-                                    src={this.state.posts.avatar}
-                                    fallback=""
-                                />
-                            </CardActionArea>
-                        </Card>
-                    </div>
-                    <div class="col">
-                        <div className="inputReview">
-                        <form required>
-                            <TextArea rows={2} required value={this.state.newReview} onChange={(event) => this.reviewInput(event)} />
-                            <Button type="primary" onClick={this.addReview}>Add Review</Button>
-                        </form>
+        if (this.state.token === null) {
+            return <div className="container"><div className="redirect-card"><ViewReviewsRedirect /></div></div>
+        } else {
+            return (
+                <div class="container">
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col">
+                            <Card sx={{ maxWidth: 400 }} key={this.state.posts.id} >
+                                <CardActionArea>
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="div">
+                                            {this.state.posts.name}
+                                        </Typography>
+                                    </CardContent> <Image
+                                        width={400}
+                                        src={this.state.posts.avatar}
+                                        fallback=""
+                                    />
+                                </CardActionArea>
+                            </Card>
                         </div>
-                        <br />
-                        <div className="listOfReviews">
-                            {this.state.reviews.map(comment => {
-                                return <div className="review" key={comment.id}>
-                                    <Comment className="reviews-list"
-                                      
-                                        author={  <p className="review-username"> {comment.user.username} </p>}
-                                       
-                                        content={
-                                            <p>
-                                                {comment.comment}
-                                            </p>
-                                        }
-                                        datetime={
-                                            <Tooltip title={comment.date} className="review-date">
-                                                <span>{comment.date}</span>
-                                            </Tooltip>
-                                        }
-                                    /> </div>
-                            })}
-                        </div>
+                        <div class="col">
+                            <div className="inputReview">
+                                <form required>
+                                    <TextArea rows={2} required value={this.state.newReview} onChange={(event) => this.reviewInput(event)} />
+                                    <Button type="primary" onClick={this.addReview}>Add Review</Button>
+                                </form>
+                            </div>
+                            <br />
+                            <div className="listOfReviews">
+                                {this.state.reviews.map(comment => {
+                                    return <div className="review" key={comment.id}>
+                                        <Comment className="reviews-list"
 
+                                            author={<p className="review-username"> {comment.user.username} </p>}
+
+                                            content={
+                                                <p>
+                                                    {comment.comment}
+                                                </p>
+                                            }
+                                            datetime={
+                                                <Tooltip title={comment.date} className="review-date">
+                                                    <span>{comment.date}</span>
+                                                </Tooltip>
+                                            }
+                                        /> </div>
+                                })}
+                            </div>
+
+                        </div>
                     </div>
+
+
                 </div>
-
-
-            </div>
-        )
+            )
+        }
     }
 }
-
 export default withRouter(CommentsIndex);

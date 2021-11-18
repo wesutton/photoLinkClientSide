@@ -5,11 +5,18 @@ import {
     BrowserRouter as Router,
 } from 'react-router-dom';
 
-const App: React.FC<{token: string|null}> = (props) => {
+interface AppProps{
+    updateToken: (newtoken: any) => void,
+    token: string | null,
+    clickLogout: (logout: React.FormEvent) => void,
+
+}
+
+const App = (props: AppProps) => {
         return (
             <div>
                 <Router>
-                    <SplashBar token = {props.token}  />
+                    <SplashBar clickLogout={props.clickLogout} token = {props.token} updateToken={props.updateToken}  />
                 </Router>
                 <Footer/>
             </div>

@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import { Input } from 'antd';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-import { CommentOutlined, } from '@ant-design/icons';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import SearchFilter from './SearchFilter'
 import 'antd/dist/antd.css';
 import './SearchIndex.scss'
@@ -16,12 +12,13 @@ export default class Index extends Component {
         super(props);
         this.state = {
             posts: [],
+            loading: true,
             searchTerm: ''
         };
         this.fetchAllPosts = this.fetchAllPosts.bind(this);
     }
 
-   
+
 
     fetchAllPosts() {
         fetch('http://localhost:3000/mypage/', {
@@ -32,7 +29,7 @@ export default class Index extends Component {
             })
         }).then((res) => res.json())
             .then((posts) => {
-                this.setState({ posts: posts })
+                this.setState({ posts: posts, isLoaded: true })
                 console.log(posts)
 
             }).catch((error) => {
@@ -45,22 +42,32 @@ export default class Index extends Component {
     }
 
     searchFunction = (event) => {
-             this.setState({ searchTerm: event.target.value })
+        this.setState({ searchTerm: event.target.value })
     }
 
 
     render() {
-        const filteredPosts2 = this.state.posts.filter((image) => 
+        const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+        const filteredPosts2 = this.state.posts.filter((image) =>
             image.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || image.user.username.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-      
-        return (
-            <div>
-                {/* <Input placeholder="search by title or username"  value={this.state.searchTerm} allowClear onChange={this.searchFunction.bind(this)} style ={ {width: '320px'}}/> */}
-                 <Input placeholder="search by title or username"  allowClear onChange={(event) => this.searchFunction(event)} style ={ {width: '320px'}}/>
-                <br/>
-                <br/>
-                <SearchFilter filter={filteredPosts2} token = {this.props.token}/>
-            </div>
-        )
+        if (!this.state.isLoaded) {
+            return (
+                <div>
+                    <Input placeholder="search by title or username" allowClear onChange={(event) => this.searchFunction(event)} style={{ width: '320px' }} />
+                    <div >
+                    <Spin indicator={antIcon} style={{marginTop: '200px'}} />
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <Input placeholder="search by title or username" allowClear onChange={(event) => this.searchFunction(event)} style={{ width: '320px' }} />
+                    <br />
+                    <br />
+                    <SearchFilter filter={filteredPosts2} token={this.props.token} />
+                </div>
+            )
+        }
     }
 }

@@ -1,5 +1,5 @@
 .auth-background{
-    background: url('../images/cameras.jpg') no-repeat center center fixed; 
+    background: url('../images/authbackground.jpg') no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -8,4 +8,5 @@
     display: flex;
     align-items: center;
     padding-bottom: 90px;
+    padding-top: 40px;
 }
