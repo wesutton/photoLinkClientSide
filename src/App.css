@@ -1,4 +1,6 @@
 .App {
   text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  background-image: linear-gradient(to right, white, rgb(240, 240, 240), rgb(219, 216, 216));
 }
 

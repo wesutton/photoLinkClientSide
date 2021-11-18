@@ -1,0 +1,21 @@
+.review-cards{
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 75px;
+}
+
+.myreviews-list{
+
+
+}
+
+.myreview-date{
+        padding-left: 20px;
+}
+
+.review-comment{
+    padding-left: 15px;
+    padding-right: 15px;
+}

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Form, FormGroup } from 'reactstrap';
+import {RiImageAddFill} from 'react-icons/ri'
+import './UploadForm.scss'
 
-// const Input = styled('input')({
-//     display: 'none',
-// });
 
 const UploadForm = (props) => {
     const [data, setData] = useState({
@@ -32,58 +31,17 @@ const UploadForm = (props) => {
             });
             if (res.ok) {
                 setData({name: '', image: ''})
+                console.log('image uploaded')
             }
         } catch (error) {
             console.log(error)
         }
     }
-    // const [title, setTitle] = useState('');
-    // const [imageUrl, setImageUrl] = useState('');
-    // const [error, setError] = useState(null);
-
-    // const types = ['image/png', 'image/jpeg']
-
-    // const changeHandler = (e) => {
-    //     let selected = e.target.files[0];
-
-    //     if (selected && types.includes(selected.type)) {
-    //         setFile(selected);
-    //         setError('')
-    //     } else {
-    //         setFile(null);
-    //         setError('Image must be correct file type (png or jpeg)')
-
-    //     }
-    //     console.log(selected)
-    // }
-
-    // const handleSubmit = (e)=> {
-    //     e.preventDefault();
-    //     fetch('http://localhost:3000/mypage/post', {
-    //         method: 'POST',
-    //         body: JSON.stringify({image: {title: title, imageUrl: imageUrl}}),
-    //         headers: new Headers({
-    //             'Content-Type': 'application/json',
-    //             'Authorization': props.token
-    //         })
-    //     }) .then((res) => res.json())
-    //     .then((imageData) => {
-    //         console.log(imageData);
-    //         setTitle('');
-    //         setImageUrl('');
-    //         props.fetchMyPosts();
-    //     })
-    // }
-
-
-
-
-
 
     return (
         <div>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Upload
+            <button className = 'upload-button' type="primary" style = {{height: '40px'}} class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <RiImageAddFill style = {{height: '27px', width: '40px'}}/>
             </button>
 
 
@@ -98,11 +56,11 @@ const UploadForm = (props) => {
                             <Form>
                                 <FormGroup>
                                     <label htmlFor="name" />
-                                    <input className = "form-control" name="name" type="text" placeholder="title" value={data.name} onChange={handleChange('name')} />
+                                    <input  className = "form-control" name="name" type="text" placeholder="title" value={data.name} onChange={handleChange('name')} required/>
                                 </FormGroup>
                                 <FormGroup>
                                     <label htmlFor="image" />
-                                    <input className = "form-control" name="image" type="file" accept="image/*"  onChange={handleChange('image')} />
+                                    <input className = "form-control" name="image" type="file" accept="image/*"  onChange={handleChange('image')} required />
                                 </FormGroup>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
