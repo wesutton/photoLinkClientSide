@@ -12,6 +12,7 @@ import { Button } from 'antd';
 import { Image } from 'antd';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import './Photos.scss'
 
 class Photos extends Component {
     constructor(props) {
