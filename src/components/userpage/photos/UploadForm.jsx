@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, FormGroup } from 'reactstrap';
+import APIURL from '../../../helpers/environments';
 import {RiImageAddFill} from 'react-icons/ri'
 import './UploadForm.scss'
 
@@ -22,7 +23,7 @@ const UploadForm = (props) => {
             formData.append('image', data.image)
             formData.append('name', data.name)
 
-            const res = await fetch('http://localhost:3000/mypage/post', {
+            const res = await fetch(`${APIURL}/mypage/post`, {
                 method: "POST",
                 body: formData,
                 headers: new Headers({

@@ -12,6 +12,7 @@ import { Button } from 'antd';
 import { Image } from 'antd';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import APIURL from '../../../helpers/environments'
 import './Photos.scss'
 
 class Photos extends Component {
@@ -30,7 +31,7 @@ class Photos extends Component {
     }
 
     async fetchMyPosts() {
-        await fetch('http://localhost:3000/mypage/myposts', {
+        await fetch(`${APIURL}/mypage/myposts`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -52,7 +53,7 @@ class Photos extends Component {
 
 
     async deleteImage(id) {
-        await fetch(`http://localhost:3000/mypage/delete/${id}`, {
+        await fetch(`${APIURL}/mypage/delete/${id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',

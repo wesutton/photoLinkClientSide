@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { Button } from 'antd';
 import { Input } from 'antd';
 import { Link } from 'react-router-dom';
+import APIURL from '../../../helpers/environments';
 
 
 import { Form, FormGroup } from 'reactstrap';
@@ -23,7 +24,7 @@ class EditReview extends Component {
 
     async fetchReview() {
         const id = this.props.match.params.entryid
-        await fetch(`http://localhost:3000/reviews/myreview/${id}`, {
+        await fetch(`${APIURL}/reviews/myreview/${id}`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ class EditReview extends Component {
         event.preventDefault()
         const id = this.props.match.params.entryid
         console.log(id)
-        await fetch(`http://localhost:3000/reviews/update/${id}`, {
+        await fetch(`${APIURL}/reviews/update/${id}`, {
             method: 'PUT',
             body: JSON.stringify({ review: { comment: this.state.comment } }),
             headers: new Headers({

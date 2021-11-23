@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Component } from 'react'
 import { Form, FormGroup } from 'reactstrap';
 import { withRouter } from 'react-router';
+import APIURL from '../../../helpers/environments';
 
 class EditImage extends Component {
     constructor(props) { 
@@ -18,7 +19,7 @@ class EditImage extends Component {
 
     componentDidMount() {
         const id = this.props.match.params.id
-        fetch(`http://localhost:3000/mypage/${id}`, {
+        fetch(`${APIURL}/mypage/${id}`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -46,7 +47,7 @@ class EditImage extends Component {
             let formData = new FormData()
             formData.append('image', this.state.data.image)
             formData.append('name', this.state.data.name)
-            const res = await fetch(`http://localhost:3000/mypage/edit/${id}`, {
+            const res = await fetch(`${APIURL}/mypage/edit/${id}`, {
                 method: "PUT",
                 body: formData,
                 headers: new Headers({

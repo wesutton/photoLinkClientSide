@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { Comment, Tooltip, Avatar } from 'antd';
 import {Button} from 'antd'
+import APIURL from '../../../helpers/environments';
 import './Photos'
 
 
@@ -19,7 +20,7 @@ class CommentsModal extends Component {
   async fetchReviews() {
     const id = this.props.match.params.imageId
     console.log(id)
-    await fetch(`http://localhost:3000/reviews/${id}`, {
+    await fetch(`${APIURL}/reviews/${id}`, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',

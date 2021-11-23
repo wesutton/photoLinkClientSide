@@ -8,6 +8,7 @@ import { Button } from 'antd';
 import { Image } from 'antd';
 import { Link } from 'react-router-dom';
 import { Comment, Tooltip} from 'antd';
+import APIURL from '../../../helpers/environments';
 import './UserReviewIndex.scss'
 
 export default class UserReviewsIndex extends Component {
@@ -21,7 +22,7 @@ export default class UserReviewsIndex extends Component {
     }
 
     async fetchMyReviews() {
-        await fetch('http://localhost:3000/reviews/myreview', {
+        await fetch(`${APIURL}/reviews/myreview`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -42,7 +43,7 @@ export default class UserReviewsIndex extends Component {
     }
 
     async deleteReview(id) {
-        await fetch(`http://localhost:3000/reviews/delete/${id}`, {
+        await fetch(`${APIURL}/reviews/delete/${id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',

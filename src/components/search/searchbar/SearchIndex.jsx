@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { Input } from 'antd';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import SearchFilter from './SearchFilter';
+import SearchFilter from './searchFilter';
 import 'antd/dist/antd.css';
 import './SearchIndex.scss'
+import APIURL from '../../../helpers/environments';
 const { Search } = Input;
 
 export default class Index extends Component {
@@ -21,7 +22,7 @@ export default class Index extends Component {
 
 
     fetchAllPosts() {
-        fetch('http://localhost:3000/mypage/', {
+        fetch(`${APIURL}/mypage/`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
