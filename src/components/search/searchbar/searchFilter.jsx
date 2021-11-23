@@ -4,9 +4,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import CommentsIndex from '../comments/CommentsIndex'
 import { CardActionArea } from '@mui/material';
-import { CommentOutlined, } from '@ant-design/icons';
+
 
 export default class searchFilter extends Component {
     constructor(props){

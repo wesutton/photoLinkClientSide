@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Grid,Paper, Avatar, TextField, Button, Typography,Link } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import LoginFail from '../components/UI/LoginFail';
+import APIURL from '../helpers/environments'
 
 
 type AcceptedProps = {
@@ -22,7 +23,7 @@ const Login: React.FC<AcceptedProps> = (props) =>{
 
     let handleSubmit = (event: React.FormEvent) =>{
         event.preventDefault();
-        fetch("http://localhost:3000/user/login", {
+        fetch(`${APIURL}/user/login`, {
             method: 'POST', 
             body: JSON.stringify({user: {username: username, password: password}}),
             headers: new Headers({

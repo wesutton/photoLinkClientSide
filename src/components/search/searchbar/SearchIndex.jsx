@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Input } from 'antd';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import SearchFilter from './SearchFilter'
+import SearchFilter from './SearchFilter';
 import 'antd/dist/antd.css';
 import './SearchIndex.scss'
 const { Search } = Input;

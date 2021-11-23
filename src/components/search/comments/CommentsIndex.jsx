@@ -10,6 +10,7 @@ import { CardActionArea } from '@mui/material';
 import { Comment, Tooltip, Avatar } from 'antd';
 import './CommentsIndex.scss';
 import { Input } from 'antd';
+import APIURL from '../../../helpers/environments'
 
 class CommentsIndex extends Component {
     constructor(props) {
@@ -29,7 +30,7 @@ class CommentsIndex extends Component {
 
     async fetchPost() {
         const id = this.props.match.params.id
-        await fetch(`http://localhost:3000/mypage/${id}`, {
+        await fetch(`${APIURL}/mypage/${id}`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ class CommentsIndex extends Component {
 
     async fetchReviews() {
         const id = this.props.match.params.id
-        await fetch(`http://localhost:3000/reviews/${id}`, {
+        await fetch(`${APIURL}/reviews/${id}`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -72,7 +73,7 @@ class CommentsIndex extends Component {
 
     async addReview() {
         const id = this.props.match.params.id
-        await fetch('http://localhost:3000/reviews/post', {
+        await fetch(`${APIURL}/reviews/post`, {
             method: 'POST',
             body: JSON.stringify({ review: { comment: this.state.newReview, imageId: id, } }),
             headers: new Headers({

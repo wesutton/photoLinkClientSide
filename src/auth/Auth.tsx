@@ -22,7 +22,7 @@ const Auth: React.FC<{updateToken: (newtoken: any) => void}> = (props) => {
   };
 
   const paperStyle = { width: "fit-content", margin: "20px auto", };
-  const tabstyle = {marginLeft:'80px',};
+  const tabstyle = {marginLeft:'80px', paddingTop: '20px'};
 
   function TabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;

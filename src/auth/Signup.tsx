@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Grid, Paper, Avatar, Typography, TextField, Button } from '@material-ui/core'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+import APIURL from '../helpers/environments'
 
 
 const Signup: React.FC<{updateToken: (session: string | number) => void }> = (props) => {
@@ -16,7 +17,7 @@ const Signup: React.FC<{updateToken: (session: string | number) => void }> = (pr
     
     let handleSubmit = (event: React.FormEvent) =>{
         event.preventDefault();
-        fetch("http://localhost:3000/user/create", {
+        fetch(`${APIURL}/user/create`, {
             method: 'POST', 
             body: JSON.stringify({user: {firstName: firstName, lastName: lastName, username: username, password: password}}),
             headers: new Headers({
